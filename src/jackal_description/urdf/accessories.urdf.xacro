@@ -65,7 +65,7 @@
       <xacro:if value="${tower}">
         <xacro:if value="${mount_type == 'upright'}">
           <xacro:sick_lms1xx_upright_mount topic="${topic}" prefix="${prefix}" parent_link="${parent}">
-            <origin xyz="$(optenv JACKAL_LASER_OFFSET -0.12 0 0.16)" rpy="$(optenv JACKAL_LASER_RPY 0 0 0)" />
+            <origin xyz="$(optenv JACKAL_LASER_OFFSET -0.12 0 0)" rpy="$(optenv JACKAL_LASER_RPY 0 0 0)" />
           </xacro:sick_lms1xx_upright_mount>
         </xacro:if>
         <xacro:if value="${mount_type == 'inverted'}">

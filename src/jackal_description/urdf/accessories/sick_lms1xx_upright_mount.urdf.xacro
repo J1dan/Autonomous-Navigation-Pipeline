@@ -42,19 +42,32 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     </joint>
 
     <link name="${prefix}_laser_mount">
-      <visual>
-        <origin xyz="0 0 0" rpy="0 0 0" />
-        <geometry>
-          <!-- Origin of this mesh is the base of the bracket. -->
-          <mesh filename="package://jackal_description/meshes/sick-lms1xx-upright-bracket.stl" />
-        </geometry>
-        <material name="dark_grey" />
-      </visual>
+        <visual>
+          <geometry>
+            <cylinder radius="0.055" length = "0.26"/>
+          </geometry>
+          <origin xyz="0 0 0" rpy="0 0 0" /> 
+          <material name="dark_grey" />
+        </visual>
+        <collision>
+          <geometry>
+            <cylinder radius="0.055" length = "0.26"/>
+          </geometry>
+          <origin xyz="0 0 0" rpy="0 0 0" /> 
+        </collision>
+        <inertial>
+          <origin xyz="0 0 0" rpy="0 0 0"/>
+          <mass value="0.2"/>
+          <inertia
+            ixx="0.0012779167" ixy="0" ixz="0"
+            iyy="0.0012779167" iyz="0"
+            izz="0.0003025"/>
+        </inertial>
     </link>
 
     <joint name="${prefix}_laser_joint" type="fixed">
       <!-- This offset is from the base of the bracket to the LIDAR's focal point. -->
-      <origin xyz="0 0 0.149" rpy="0 0 0" />
+      <origin xyz="0 0 0.2456" rpy="0 0 0" />
       <parent link="${prefix}_laser_mount" />
       <child link="${prefix}_laser" />
     </joint>
