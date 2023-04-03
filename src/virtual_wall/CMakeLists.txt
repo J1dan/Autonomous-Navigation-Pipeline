@@ -216,4 +216,4 @@ add_executable(virtual_wall_server src/main.cpp)
 target_link_libraries(virtual_wall_server  ${catkin_LIBRARIES})
 add_dependencies(virtual_wall_server move_base_virtual_wall_server_gencpp)
 
-add_definitions(-std=c++11)
+add_definitions(-std=c++14)
