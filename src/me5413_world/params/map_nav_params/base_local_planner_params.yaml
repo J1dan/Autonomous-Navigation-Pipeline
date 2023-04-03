@@ -26,7 +26,7 @@ TrajectoryPlannerROS:
   vx_samples: 20
   vth_samples: 40
   vtheta_samples: 40
-  controller_frequency: 20.0
+  controller_frequency: 50.0
 
   # Trajectory scoring parameters
   meter_scoring: true # Whether the gdist_scale and pdist_scale parameters should assume that goal_distance and path_distance are expressed in units of meters or cells. Cells are assumed by default (false).
