@@ -19,11 +19,14 @@
   <!-- Launch Move Base -->
   <include file="$(find me5413_world)/launch/include/move_base_agg.launch" />
 
-  <node name="imu_calibration" pkg="localization" type="imuCalibration.py"  output="screen"/>
+  <!-- <node name="imu_calibration" pkg="localization" type="imuCalibration.py"  output="screen"/> -->
 
   <node name="virtual_wall_server" pkg="move_base_virtual_wall_server" type="virtual_wall_server" output="screen"/>
 
   <node name="create_wall_node" pkg="move_base_virtual_wall_server" type="createWall.py" output="screen"/>
+
+  <!-- Launch Kinect Filter -->
+  <include file="$(find me5413_world)/launch/2kinect.launch" />
 
   <!-- Launch Rviz with our settings -->
   <node type="rviz" name="rviz" pkg="rviz" args="-d $(find me5413_world)/rviz/navigation.rviz" output="log" respawn="true"/>

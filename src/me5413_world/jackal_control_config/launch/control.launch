@@ -2,21 +2,21 @@
 
   <arg name="enable_ekf" default="$(optenv ENABLE_EKF true)"/>
 
-  <rosparam command="load" file="$(find jackal_control)/config/control.yaml" />
+  <rosparam command="load" file="$(find me5413_world)/jackal_control_config/config/control.yaml" />
 
   <node name="controller_spawner" pkg="controller_manager" type="spawner"
         args="jackal_joint_publisher jackal_velocity_controller" />
 
   <group if="$(arg enable_ekf)" >
     <node pkg="robot_localization" type="ekf_localization_node" name="ekf_localization">
-      <rosparam command="load" file="$(find jackal_control)/config/robot_localization.yaml" />
+      <rosparam command="load" file="$(find me5413_world)/jackal_control_config/config/robot_localization.yaml" />
     </node>
 
     <group if="$(optenv JACKAL_IMU_MICROSTRAIN 0)">
       <!-- Optionally load the configuration for the Microstrain-family IMU -->
       <rosparam>
         ekf_localization:
-          imu1: microstrain/imu/data
+          imu1: /imu/data_calibrated
           imu1_config: [false, false, false,
                       true, true, true,
                       false, false, false,
@@ -24,7 +24,7 @@
                       false, false, false]
           imu1_differential: false
       </rosparam>
-      <param name="ekf_localization/imu1" value="$(optenv JACKAL_IMU_MICROSTRAIN_NAME microstrain)/imu/data"/>
+      <param name="ekf_localization/imu1" value="/imu/data_calibrated"/>
     </group>
   </group>
 

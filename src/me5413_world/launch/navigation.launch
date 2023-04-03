@@ -3,9 +3,14 @@
   <!-- Connect the robot to a keyboard teleop controller -->
   <node name="teleop_twist_keyboard" pkg="teleop_twist_keyboard" type="teleop_twist_keyboard.py" output="screen" respawn="true"/>
 
-  <!-- Run the map server -->
+  <!-- Run the map servers -->
   <arg name="map_file" default="$(find me5413_world)/maps/28_map_5.yaml"/>
   <node name="map_server" pkg="map_server" type="map_server" args="$(arg map_file)" />
+  
+  <arg name="map_file_2" default="$(find me5413_world)/maps/28_map_5_1.yaml"/>
+  <node name="map_server_2" pkg="map_server" type="map_server" args="$(arg map_file_2)">
+    <remap from="/map" to="/traversable_map"/>
+  </node>
   
   <!-- Launch the AMCL Localizer -->
   <include file="$(find me5413_world)/launch/include/amcl.launch" />
@@ -13,11 +18,14 @@
   <!-- Launch Move Base -->
   <include file="$(find me5413_world)/launch/include/move_base.launch" />
 
-  <node name="imu_calibration" pkg="localization" type="imuCalibration.py"  output="screen"/>
+  <!-- <node name="imu_calibration" pkg="localization" type="imuCalibration.py"  output="screen"/> -->
 
   <node name="virtual_wall_server" pkg="move_base_virtual_wall_server" type="virtual_wall_server" output="screen"/>
 
   <node name="create_wall_node" pkg="move_base_virtual_wall_server" type="createWall.py" output="screen"/>
+
+  <!-- Launch Kinect Filter -->
+  <include file="$(find me5413_world)/launch/2kinect.launch" />
 
   <!-- Launch Rviz with our settings -->
   <node type="rviz" name="rviz" pkg="rviz" args="-d $(find me5413_world)/rviz/navigation.rviz" output="log" respawn="true"/>
