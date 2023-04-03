@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>localization</name>
+  <version>0.0.1</version>
+  <description>The localization package</description>
+
+  <maintainer email="your_email_address@example.com">Ziggy</maintainer>
+
+  <buildtool_depend>catkin</buildtool_depend>
+  <license>MIT</license>
+
+</package>
+

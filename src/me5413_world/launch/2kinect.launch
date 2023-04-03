@@ -1,0 +1,16 @@
+<launch>
+  <node pkg="nodelet" type="nodelet" name="pcl_manager" args="manager" output="screen" />
+  <!-- Run a passthrough filter to remove floor and transform -->
+  <node pkg="nodelet" type="nodelet" name="passthrough" args="load pcl/PassThrough pcl_manager" output="screen">
+    <remap from="~input" to="/kinect/depth/points" />
+    <remap from="/passthrough/output" to="/kinect/depth/points_filtered" />
+    <rosparam>
+      filter_field_name: z
+      filter_limit_min: 0.05
+      filter_limit_max: 0.55
+      filter_limit_negative: False
+      input_frame: map
+      output_frame: base_link
+    </rosparam>
+  </node>
+</launch>
