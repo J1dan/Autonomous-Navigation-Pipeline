@@ -34,7 +34,7 @@ obstacles_layer:
 # sensor_frame: front_laser
  
 static_layer:
- map_topic: /map
+ map_topic: /traversable_map
  subscribe_to_updates: true
  unknown_cost_value: 0
  lethal_cost_threshold: 100000

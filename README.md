@@ -2,6 +2,95 @@
 
 NUS ME5413 Autonomous Mobile Robotics Final Project
 > Authors: Christina Lee, Dongen Li, Yuhang Han, and Shuo Sun
+> Project done by: Dongen Li, Haozhe Wang, Jie Chen, Ziggy Huang
+
+## Features and Demonstrations
+In this project, we implement a multi-sensor navigation pipeline in the Gazebo world. Our features are listed as:
+* We modify the robot configurations and implement multi-sensor obstacle detection using either 2 LiDARs or a single Kinect depth camera.
+* We implement a IMU calibrator to reduce the systematic error of IMU which is found to cause stationary rotation of the robot's localization.
+* We implement two methods for setting non-passable areas. First is to use a seperate map server for sending the traversable map to the planner, second is to create virtual walls by sending requests to the virtual wall server.
+* We implement a aggresive planner and a conservative planner which exhibits different maneuvers and can be chosen by the users depending on their needs.
+
+In our implementation, the configuration of each of our navigation launch file is:
+
+ *navigation.launch*:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2 LiDARs for obstacle detection; conservative setting; seperate map servers
+
+ *navigation_kinect.launch*: 1 Kinect depth camera for obstacle detection, others are same as the above one
+ 
+ *navigation_agg.launch*:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2 LiDARs for obstacle detection; aggresive setting; virtual wall servers
+
+<img src="Example/Overview.jpg" width="350"/>
+
+* Our system pipieline
+
+<img src="Example/RobotConfig.jpg" width="350"/>
+
+* Our robot configuration
+
+<img src="Example/navigating.png" width="350"/><img src="Example/kinectNav.png" width="350"/>
+
+* Detecting obstacles through Kinect and traversing added obstacles
+
+<img src="Example/virtualWall.png" width="350"/>
+
+* The created virtual wall
+
+## Prerequisites
+Refer to the Dependencies section below.
+
+## Install
+1. Clone the repository.
+  ```terminal
+    git clone https://github.com/J1dan/ME5413_Final_Project_submission.git
+  ```terminal
+
+2. In a terminal, go to the folder and compile, after which, source the ROS workspace.
+  ```terminal
+    cd ME5413_Final_Project
+    catkin_make
+    source devel/setup.sh
+  ```
+## Let's go
+
+Run the launch files.
+  ```terminal
+    cd src/me5413_world/launch
+  ```
+  In the first terminal, launch the Gazebo world:
+  ```terminal
+    roslaunch world.launch
+  ```
+  In the second terminal, launch the navigation file:
+  ```terminal
+    roslaunch navigation.launch
+  ```
+  * There are lots of configurations. Details can be found at the beginning.
+  In the third terminal, launch the IMU calibration node.
+  ```terminal
+    python imuCalibration.py
+  ```
+  * To add virtual walls to the cost map, in a new terminal:
+  ```terminal
+    rosrun move_base_virtual_wall_server virtual_wall_server 
+  ```
+  In another terminal:
+  ```terminal
+    rosrun move_base_virtual_wall_server createWall.py 
+  ```
+  To delete,
+  ```terminal
+    rosrun move_base_virtual_wall_server deleteWall.py 
+  ```
+  Note that in our implementation, the control room is to be sealed. You can modify the python file for creating customized virtual walls.
+
+  After launching the IMU calibration node, wait for 10 seconds for calibrating without moving the robot, or the localization would fail.
+
+  Then, you could use the 2D nav goal to set a goal pose for the robot.
+
+
+
+
+
 
 ![Ubuntu 20.04](https://img.shields.io/badge/OS-Ubuntu_20.04-informational?style=flat&logo=ubuntu&logoColor=white&color=2bbc8a)
 ![ROS Noetic](https://img.shields.io/badge/Tools-ROS_Noetic-informational?style=flat&logo=ROS&logoColor=white&color=2bbc8a)

@@ -15,8 +15,10 @@ TrajectoryPlannerROS:
   escape_vel: -0.5
 
   # Goal Tolerance Parameters
-  yaw_goal_tolerance: 0.1
-  xy_goal_tolerance: 0.25
+  # yaw_goal_tolerance: 0.1
+  # xy_goal_tolerance: 0.25
+  yaw_goal_tolerance: 0.13
+  xy_goal_tolerance: 0.15
   latch_xy_goal_tolerance: false
 
   # Forward Simulation Parameters
@@ -33,6 +35,11 @@ TrajectoryPlannerROS:
   occdist_scale:  0.008 #The weighting for how much the controller should attempt to avoid obstacles. default 0.01
   pdist_scale: 64  #     The weighting for how much the controller should stay close to the path it was given . default 0.6
   gdist_scale: 16 #     The weighting for how much the controller should attempt to reach its local goal, also controls speed  default 0.8
+  
+  # occdist_scale:  0.02 #The weighting for how much the controller should attempt to avoid obstacles. default 0.01
+  # pdist_scale: 32  #     The weighting for how much the controller should stay close to the path it was given . default 0.6
+  # gdist_scale: 15 
+
 
   heading_lookahead: 0.325  #How far to look ahead in meters when scoring different in-place-rotation trajectories
   heading_scoring: true  #Whether to score based on the robot's heading to the path or its distance from the path. default false
