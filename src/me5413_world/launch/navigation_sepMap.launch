@@ -23,7 +23,7 @@
 
   <node name="virtual_wall_server" pkg="move_base_virtual_wall_server" type="virtual_wall_server" output="screen"/>
 
-  <node name="create_wall_node" pkg="move_base_virtual_wall_server" type="createWall.py" output="screen"/>
+  <!-- <node name="create_wall_node" pkg="move_base_virtual_wall_server" type="createWall.py" output="screen"/> -->
 
   <!-- Launch Kinect Filter -->
   <include file="$(find me5413_world)/launch/2kinect.launch" />

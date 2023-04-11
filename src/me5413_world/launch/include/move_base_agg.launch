@@ -15,7 +15,7 @@
     <param name="base_local_planner" value="base_local_planner/TrajectoryPlannerROS"/>
     
     <remap from="odom" to="odometry/filtered" />
-    <remap from="/map" to="/traversable_map"/>
+    <!-- <remap from="/map" to="/traversable_map"/> -->
   </node>
 
 </launch>
